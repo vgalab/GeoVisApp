@@ -1,0 +1,87 @@
+<div class="wrapper" *ngIf="!datasetInfo">
+  <ion-label>Please open a directory to start.</ion-label>
+</div>
+
+<div class="wrapper" *ngIf="datasetInfo">
+  <ion-item-group>
+    <ion-item-divider>
+      <ion-label>Data Filter</ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD" [min]="datasetInfo.minDate" [max]="datasetInfo.maxDate"
+        [(ngModel)]="pickedDate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Variable</ion-label>
+      <ion-select interface="popover" [(ngModel)]="selectedVariable">
+        <ion-select-option *ngFor="let variable of datasetInfo.variableList" [value]="variable">{{variable}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider>
+      <ion-label>General</ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-button (click)="resetVisImageTransform()">Reset Position and Scale</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="resetPCBrush()">Reset Brush</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label>Show Brushed Range</ion-label>
+      <ion-toggle [(ngModel)]="isShowingBrushedChartData"></ion-toggle>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider>
+      <ion-label>User Select Rect</ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label>Enabled</ion-label>
+      <ion-toggle [(ngModel)]="isSelectionEnabled"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Show On Chart</ion-label>
+      <ion-toggle [(ngModel)]="isShowingSelectedRangeOnChart"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Color</ion-label>
+      <input class="color-input" type="color" [(ngModel)]="selectionRectColor" />
+    </ion-item>
+    <ion-item>
+      <ion-label>Opacity</ion-label>
+      <ion-range min="0" max="1" step="0.01" [(ngModel)]="selectionRectOpacity">
+        <ion-label slot="start">0</ion-label>
+        <ion-label slot="end">1</ion-label>
+      </ion-range>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider>
+      <ion-label>Data Range</ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label>Date From</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD" [min]="datasetInfo.minDate" [max]="datasetInfo.maxDate"
+        [(ngModel)]="pickedDateFrom"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Date To</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD" [min]="datasetInfo.minDate" [max]="datasetInfo.maxDate"
+        [(ngModel)]="pickedDateTo"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="generate()">Generate</ion-button>
+    </ion-item>
+  </ion-item-group>
+</div>

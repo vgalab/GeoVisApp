@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-title>
+      VIS - {{uploadedDirectoryName}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="fileUploadClicked(filePicker)">
+        <ion-icon name="folder"></ion-icon>
+      </ion-button>
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-split-pane contentId="menu-content">
+    <!--  our side menu  -->
+    <ion-menu side="end" contentId="menu-content">
+      <app-vis-control [datasetInfo]="datasetInfo" [(pickedDate)]="pickedDate" [(selectedVariable)]="selectedVariable"
+        [resetVisImageTransform]="resetVisImageTransform" [showPCBrushedRange]="showPCBrushedRange" [(isShowingBrushedChartData)]="isShowingBrushedChartData"
+        [(isSelectionEnabled)]="isSelectionEnabled" [(isShowingSelectedRangeOnChart)]="isShowingSelectedRangeOnChart"
+        [(selectionRectColor)]="selectionRectColor" [(selectionRectOpacity)]="selectionRectOpacity"></app-vis-control>
+    </ion-menu>
+
+    <!-- the main content -->
+    <ion-content padding id="menu-content" color="light">
+      <ion-row class="upper-row">
+        <ion-col>
+          <ion-card>
+            <app-vis-main [uploadedFiles]="uploadedFiles" [openedPath]="openedPath" [datasetInfo]="datasetInfo" [pickedDate]="pickedDate"
+              [selectedVariable]="selectedVariable" [brushedChartData]="brushedChartData" [isShowingBrushedChartData]="isShowingBrushedChartData" [(resetVisImageTransform)]="resetVisImageTransform"
+              [(showPCBrushedRange)]="showPCBrushedRange" [isSelectionEnabled]="isSelectionEnabled"
+              [isShowingSelectedRangeOnChart]="isShowingSelectedRangeOnChart" [selectionRectColor]="selectionRectColor"
+              [selectionRectOpacity]="selectionRectOpacity" [updateChart]="updateChart"></app-vis-main>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row class="lower-row">
+        <ion-col>
+          <ion-card>
+            <app-vis-stats [uploadedFiles]="uploadedFiles" [openedPath]="openedPath" [datasetInfo]="datasetInfo" [pickedDate]="pickedDate"
+              [selectedVariable]="selectedVariable" [showPCBrushedRange]="showPCBrushedRange" [(brushedChartData)]="brushedChartData" [(updateChart)]="updateChart"></app-vis-stats>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-content>
+  </ion-split-pane>
+</ion-content>
